@@ -49,7 +49,7 @@ namespace blue::unicode
 					}
 				}
 				else {
-					cp = one <= codepoint_max() ? one : replacement_character();
+					cp = is_valid(one) ? one : replacement_character();
 				}
 			}
 			else if constexpr(conv == conversion::lenient)
