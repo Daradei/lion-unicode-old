@@ -1,11 +1,11 @@
 #ifndef BLUE_UNICODE_UTILITIES_HPP
 #define BLUE_UNICODE_UTILITIES_HPP
 
-#include <blue/unicode/utf8.hpp>
-#include <blue/unicode/utf16.hpp>
-#include <blue/unicode/utf32.hpp>
-#include <blue/unicode/encoding.hpp>
-#include <blue/unicode/ustream.hpp>
+#include "utf8.hpp"
+#include "utf16.hpp"
+#include "utf32.hpp"
+#include "encoding.hpp"
+#include "ustream.hpp"
 
 #include <string_view>
 #include <type_traits>

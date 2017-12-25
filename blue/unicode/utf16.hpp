@@ -1,9 +1,9 @@
 #ifndef BLUE_UNICODE_UTF16_HPP
 #define BLUE_UNICODE_UTF16_HPP
 
-#include <blue/unicode/codepoint.hpp>
-#include <blue/unicode/encoding.hpp>
-#include <blue/unicode/ustream.hpp>
+#include "codepoint.hpp"
+#include "encoding.hpp"
+#include "ustream.hpp"
 
 #include <string>
 #include <string_view>

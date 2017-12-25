@@ -1,7 +1,7 @@
 #ifndef BLUE_UNICODE_ENCODING_HPP
 #define BLUE_UNICODE_ENCODING_HPP
 
-#include <blue/unicode/ustream.hpp>
+#include "ustream.hpp"
 
 #include <string_view>
 #include <string>
