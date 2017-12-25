@@ -335,10 +335,10 @@ namespace blue::unicode
         using iterator_category = std::bidirectional_iterator_tag;
         using iterator_type     = utf32::string_type::const_iterator;
 
-   	protected:
-  		iterator_type current;
+    protected:
+        iterator_type current;
 
-   	public:
+    public:
         iterator() noexcept;
         explicit iterator(iterator_type it) noexcept;
         iterator(const iterator& rhs) noexcept;
