@@ -1,1 +1,1 @@
-# blue-unicode
+# Small Unicode library for C++17
