@@ -1,6 +1,6 @@
 # Small Unicode library for C++17
 
-This is a small Unicode library for C++17 which supports handling of UTF-32, UTF-16 and UTF-8 sequences. That is, it supports reading and writing from and to files, encoding and decoding for all encoding schemes, as well as converting between them.
+This is a small header-only Unicode library for C++17 which supports handling of UTF-32, UTF-16 and UTF-8 sequences. That is, it supports reading and writing from and to files, encoding and decoding for all encoding schemes, as well as converting between them.
 
 Below are laid out summaries of the different parts of the library. After each one follows an explanation of the functions/types, as well as a simple example of how to use them.
 
