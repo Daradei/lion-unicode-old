@@ -34,8 +34,10 @@ namespace blue::unicode
 				{
 					if (first != last)
 					{
-						const char_type two = *first++;
-						if (is_low_surrogate(two)) {
+						const char_type two = *first;
+						if (is_low_surrogate(two)) 
+						{
+							++first;
 							cp = static_cast<codepoint>(((one - 0xD800) << 10) + (two - 0xDC00) + 0x0010000);
 						}
 						else {
