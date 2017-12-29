@@ -361,17 +361,19 @@ namespace blue::unicode
 		}
 
 		template<typename ForwardIterator>
-		static bool is_valid(ForwardIterator first, ForwardIterator last)
+		static ForwardIterator valid_sequence(ForwardIterator first, ForwardIterator last)
 		{
 			while (first != last)
 			{
+				ForwardIterator temp = first;
+
 				codepoint cp;
 				first = decode(first, last, cp);
 				if (cp == replacement_character()) {
-					return false;
+					return temp;
 				}
 			}
-			return true;
+			return first;
 		}
 	};
 
