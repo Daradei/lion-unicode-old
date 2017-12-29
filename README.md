@@ -323,6 +323,9 @@ namespace blue::unicode
 
         template<write_bom wrbom = write_bom::yes, typename ForwardIterator>
         static ForwardIterator write(uostream& out, ForwardIterator first, ForwardIterator last, byte_order order);
+	
+	template<typename ForwardIterator>
+	static bool is_valid(ForwardIterator first, ForwardIterator last);
     };
 
     class utf32::iterator
@@ -397,6 +400,9 @@ namespace blue::unicode
 
         template<write_bom wrbom = write_bom::yes, typename ForwardIterator>
         static ForwardIterator write(uostream& out, ForwardIterator first, ForwardIterator last, byte_order order);
+	
+	template<typename ForwardIterator>
+	static bool is_valid(ForwardIterator first, ForwardIterator last);
     };
 
     class utf16::iterator
@@ -471,6 +477,9 @@ namespace blue::unicode
 		
         template<write_bom wrbom = write_bom::yes, typename ForwardIterator>
         static ForwardIterator write(uostream& out, ForwardIterator first, ForwardIterator last, byte_order order = byte_order::none);
+	
+	template<typename ForwardIterator>
+	static bool is_valid(ForwardIterator first, ForwardIterator last);
     };
 
     class utf8::iterator
@@ -518,6 +527,7 @@ namespace blue::unicode
   + The functions `to_utf32`, `to_utf16` and `to_utf8` convert a given range into the respective encoding format, writing the new range into the given `OutputIterator` taking into account the provided `conversion` specifier.
   + The function `read` reads a Unicode file and stores it into the `OutputIterator` taking into account the given `byte_order`. For `utf8` the byte order must be `byte_order::none`, while for `utf16` and `utf32` - either `byte_order::little` or `byte_order::big`. If the wrong byte order is given, nothing is done.
   + The function `write` writes a UTF range into a file, taking into account the given byte order. If the provided `write_bom` template parameter is equal to `write_bom::yes`, then a BOM is written first into the file. If the wrong byte order is given, nothing is done. The function returns an iterator to the last successfully written element.
+  + The function `is_valid` checks if the given range is a valid sequence of the respective encoding format.
 
 ### An example usage of `utf32`, `utf16` and `utf8`
 
