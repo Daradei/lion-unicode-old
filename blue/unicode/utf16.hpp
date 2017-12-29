@@ -206,6 +206,20 @@ namespace blue::unicode
 			out.write(&towrite[0], towrite.size());
 			return std::next(first, out.tellp() / 2 - (wrbom == write_bom::yes ? 2 : 0));
 		}
+
+		template<typename ForwardIterator>
+		static bool is_valid(ForwardIterator first, ForwardIterator last)
+		{
+			while (first != last)
+			{
+				codepoint cp;
+				first = decode(first, last, cp);
+				if (cp == replacement_character()) {
+					return false;
+				}
+			}
+			return true;
+		}
 	};
 
 	class utf16::iterator

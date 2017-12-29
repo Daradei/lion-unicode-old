@@ -359,6 +359,20 @@ namespace blue::unicode
 			}
 			return first;
 		}
+
+		template<typename ForwardIterator>
+		static bool is_valid(ForwardIterator first, ForwardIterator last)
+		{
+			while (first != last)
+			{
+				codepoint cp;
+				first = decode(first, last, cp);
+				if (cp == replacement_character()) {
+					return false;
+				}
+			}
+			return true;
+		}
 	};
 
 	class utf8::iterator
