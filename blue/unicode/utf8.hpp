@@ -22,6 +22,7 @@ namespace blue::unicode
 		using string_view_type = std::string_view;
 		using char_type		   = unsigned char;
 
+		template<typename Iterator>
 		class iterator;
 
 		template<conversion conv = conversion::strict, typename ForwardIterator>
@@ -377,6 +378,7 @@ namespace blue::unicode
 		}
 	};
 
+	template<typename Iterator>
 	class utf8::iterator
 	{
 	public:
@@ -385,7 +387,7 @@ namespace blue::unicode
 		using pointer	        = void;
 		using reference		    = codepoint;
 		using iterator_category = std::bidirectional_iterator_tag;
-		using iterator_type		= utf8::string_type::const_iterator;
+		using iterator_type		= Iterator;
 
 	protected:
 		iterator_type current;
@@ -513,10 +515,13 @@ namespace blue::unicode
 		}
 	};
 
-	inline bool operator==(const utf8::iterator& lhs, const utf8::iterator& rhs) noexcept {
+	template<typename Iterator>
+	bool operator==(const utf8::iterator<Iterator>& lhs, const utf8::iterator<Iterator>& rhs) noexcept {
 		return lhs.base() == rhs.base();
 	}
-	inline bool operator!=(const utf8::iterator& lhs, const utf8::iterator& rhs) noexcept {
+
+	template<typename Iterator>
+	bool operator!=(const utf8::iterator<Iterator>& lhs, const utf8::iterator<Iterator>& rhs) noexcept {
 		return lhs.base() != rhs.base();
 	}
 }

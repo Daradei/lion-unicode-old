@@ -16,6 +16,66 @@ namespace blue::unicode
 	constexpr byte_order default_byte_order = byte_order::big;
 
 	template<typename UTF = default_utf, conversion conv = conversion::strict>
+	typename UTF::string_type convert(utf8::string_type str)
+	{
+		static_assert(std::is_same_v<UTF, utf8> || std::is_same_v<UTF, utf16> || std::is_same_v<UTF, utf32>,
+			"convert<UTF, conv> requires UTF to be one of utf8, utf16, utf32");
+
+		typename UTF::string_type res;
+
+		if constexpr(std::is_same_v<UTF, utf8>) {
+			utf8::to_utf8<conv>(str.begin(), str.end(), std::back_inserter(res));
+		}
+		else if constexpr(std::is_same_v<UTF, utf16>) {
+			utf8::to_utf16<conv>(str.begin(), str.end(), std::back_inserter(res));
+		}
+		else if constexpr(std::is_same_v<UTF, utf32>) {
+			utf8::to_utf32<conv>(str.begin(), str.end(), std::back_inserter(res));
+		}
+		return res;
+	}
+
+	template<typename UTF = default_utf, conversion conv = conversion::strict>
+	typename UTF::string_type convert(utf16::string_type str)
+	{
+		static_assert(std::is_same_v<UTF, utf8> || std::is_same_v<UTF, utf16> || std::is_same_v<UTF, utf32>,
+			"convert<UTF, conv> requires UTF to be one of utf8, utf16, utf32");
+
+		typename UTF::string_type res;
+
+		if constexpr(std::is_same_v<UTF, utf8>) {
+			utf16::to_utf8<conv>(str.begin(), str.end(), std::back_inserter(res));
+		}
+		else if constexpr(std::is_same_v<UTF, utf16>) {
+			utf16::to_utf16<conv>(str.begin(), str.end(), std::back_inserter(res));
+		}
+		else if constexpr(std::is_same_v<UTF, utf32>) {
+			utf16::to_utf32<conv>(str.begin(), str.end(), std::back_inserter(res));
+		}
+		return res;
+	}
+
+	template<typename UTF = default_utf, conversion conv = conversion::strict>
+	typename UTF::string_type convert(utf32::string_type str)
+	{
+		static_assert(std::is_same_v<UTF, utf8> || std::is_same_v<UTF, utf16> || std::is_same_v<UTF, utf32>,
+			"convert<UTF, conv> requires UTF to be one of utf8, utf16, utf32");
+
+		typename UTF::string_type res;
+
+		if constexpr(std::is_same_v<UTF, utf8>) {
+			utf32::to_utf8<conv>(str.begin(), str.end(), std::back_inserter(res));
+		}
+		else if constexpr(std::is_same_v<UTF, utf16>) {
+			utf32::to_utf16<conv>(str.begin(), str.end(), std::back_inserter(res));
+		}
+		else if constexpr(std::is_same_v<UTF, utf32>) {
+			utf32::to_utf32<conv>(str.begin(), str.end(), std::back_inserter(res));
+		}
+		return res;
+	}
+
+	template<typename UTF = default_utf, conversion conv = conversion::strict>
 	typename UTF::string_type read_file(uistream& in)
 	{
 		static_assert(std::is_same_v<UTF, utf8> || std::is_same_v<UTF, utf16> || std::is_same_v<UTF, utf32>,
@@ -176,16 +236,28 @@ namespace blue::unicode
 		}
 	}
 
-	inline utf8::iterator make_iterator(const utf8::string_type::const_iterator& it) {
-		return utf8::iterator(it);
+	inline auto make_iterator(const utf8::string_type::const_iterator& it) {
+		return utf8::iterator<utf8::string_type::const_iterator>(it);
 	}
 
-	inline utf16::iterator make_iterator(const utf16::string_type::const_iterator& it) {
-		return utf16::iterator(it);
+	inline auto make_iterator(const utf16::string_type::const_iterator& it) {
+		return utf16::iterator<utf16::string_type::const_iterator>(it);
 	}
 
-	inline utf32::iterator make_iterator(const utf32::string_type::const_iterator& it) {
-		return utf32::iterator(it);
+	inline auto make_iterator(const utf32::string_type::const_iterator& it) {
+		return utf32::iterator<utf32::string_type::const_iterator>(it);
+	}
+
+	inline auto make_iterator(const utf8::string_view_type::const_iterator& it) {
+		return utf8::iterator<utf8::string_view_type::const_iterator>(it);
+	}
+
+	inline auto make_iterator(const utf16::string_view_type::const_iterator& it) {
+		return utf16::iterator<utf16::string_view_type::const_iterator>(it);
+	}
+
+	inline auto make_iterator(const utf32::string_view_type::const_iterator& it) {
+		return utf32::iterator<utf32::string_view_type::const_iterator>(it);
 	}
 }
 

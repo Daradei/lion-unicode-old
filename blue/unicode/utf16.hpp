@@ -22,6 +22,7 @@ namespace blue::unicode
 		using string_view_type = std::u16string_view;
 		using char_type		   = std::u16string::value_type;
 
+		template<typename Iterator>
 		class iterator;
 
 		template<conversion conv = conversion::strict, typename ForwardIterator>
@@ -224,6 +225,7 @@ namespace blue::unicode
 		}
 	};
 
+	template<typename Iterator>
 	class utf16::iterator
 	{
 	public:
@@ -232,7 +234,7 @@ namespace blue::unicode
 		using pointer		    = void;
 		using reference	        = codepoint;
 		using iterator_category = std::bidirectional_iterator_tag;
-		using iterator_type		= utf16::string_type::const_iterator;
+		using iterator_type		= Iterator;
 
 	protected:
 		iterator_type current;
@@ -312,10 +314,13 @@ namespace blue::unicode
 		}
 	};
 
-	inline bool operator==(const utf16::iterator& lhs, const utf16::iterator& rhs) noexcept {
+	template<typename Iterator>
+	bool operator==(const utf16::iterator<Iterator>& lhs, const utf16::iterator<Iterator>& rhs) noexcept {
 		return lhs.base() == rhs.base();
 	}
-	inline bool operator!=(const utf16::iterator& lhs, const utf16::iterator& rhs) noexcept {
+
+	template<typename Iterator>
+	bool operator!=(const utf16::iterator<Iterator>& lhs, const utf16::iterator<Iterator>& rhs) noexcept {
 		return lhs.base() != rhs.base();
 	}
 }
