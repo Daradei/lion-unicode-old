@@ -12,7 +12,7 @@
 
 namespace blue::unicode
 {		
-	using default_utf = utf16;
+	using default_utf = utf8;
 	constexpr byte_order default_byte_order = byte_order::big;
 
 	template<typename UTF = default_utf, conversion conv = conversion::strict>
