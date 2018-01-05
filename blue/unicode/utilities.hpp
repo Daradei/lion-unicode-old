@@ -259,6 +259,42 @@ namespace blue::unicode
 	inline auto make_iterator(const utf32::string_view_type::const_iterator& it) {
 		return utf32::iterator<utf32::string_view_type::const_iterator>(it);
 	}
+
+	inline auto remove_BOM(utf8::string_view_type& view)
+	{
+		if (view.compare(0, constants::UTF8_BOM.size(), constants::UTF8_BOM) == 0)
+		{
+			view.remove_prefix(constants::UTF8_BOM.size());
+			return true;
+		}
+		return false;
+	}
+
+	inline auto remove_BOM(utf16::string_view_type& view)
+	{
+		if (view.empty()) {
+			return false;
+		}
+		if (is_BOM(view.front()))
+		{
+			view.remove_prefix(1);
+			return true;
+		}
+		return false;
+	}
+
+	inline auto remove_BOM(utf32::string_view_type& view)
+	{
+		if (view.empty()) {
+			return false;
+		}
+		if (is_BOM(view.front()))
+		{
+			view.remove_prefix(1);
+			return true;
+		}
+		return false;
+	}
 }
 
 #endif
