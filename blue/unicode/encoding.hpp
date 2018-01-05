@@ -55,6 +55,9 @@ namespace blue::unicode
 			char bytes[4] = { 0, 0, 0, 0 };
 			in.read(bytes, 4);
 
+			// in.read() will set failbit if there are less than 4 bytes in the file
+			in.clear();
+
 			if (constants::UTF32_LE_BOM.compare(0, 4, bytes, 4) == 0) {
 				return encoding{ format::utf32, byte_order::little };
 			}
