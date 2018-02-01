@@ -1,5 +1,7 @@
 # Small Unicode library for C++17
 
+[Note: This documentation is a little bit out of date, but valid for the most part.]
+
 This is a small header-only Unicode library for C++17 which supports handling of UTF-32, UTF-16 and UTF-8 sequences. That is, it supports reading and writing from and to files, encoding and decoding for all encoding schemes, as well as converting between them.
 
 Below are laid out summaries of the different parts of the library. After each one follows an explanation of the functions/types, as well as a simple example of how to use them.
@@ -9,7 +11,7 @@ Below are laid out summaries of the different parts of the library. After each o
 This is a simple wrapper around an `std::fstream` object. This is necessary to achieve higher security, as a Unicode file requires some restrictions - the stream must always be opened in binary mode and no formatted input/output functions should be done on it. For this purpose the wrapper types described below provide only a few of the functions `std::fstream` provides.
 
 ```c++
-namespace blue::unicode
+namespace lion::unicode
 {
     class ustream_base
     {
@@ -54,7 +56,7 @@ namespace blue::unicode
   + The member functions call the corresponding `std::fstream` function: `ustream_base::rdstate()` returns `stream.rdstate()`, etc.
 
 ```c++
-namespace blue::unicode
+namespace lion::unicode
 {
     class uistream : public ustream_base
     {
@@ -103,7 +105,7 @@ namespace blue::unicode
 * The `uistream` class is the equivalent of `std::ifstream`. It is designed to be passed to other parts of this library and not to be used by the user except for error checking.
 
 ```c++
-namespace blue::unicode
+namespace lion::unicode
 {
     class uostream : public ustream_base
     {
@@ -156,7 +158,7 @@ namespace blue::unicode
 This part of the library defines the `codepoint` type as a 32-bit unsigned integer, as well as some helper functions.
 
 ```c++
-namespace blue::unicode
+namespace lion::unicode
 {
     using codepoint = char32_t;
 
@@ -187,7 +189,7 @@ namespace blue::unicode
 The following describes functions and types which allow the recognition of the encoding scheme that a Unicode file uses.
 
 ```c++
-namespace blue::unicode
+namespace lion::unicode
 {
     namespace constants
     {
@@ -251,9 +253,9 @@ namespace blue::unicode
 #### Example usage of `encoding`
 
 ```c++
-#include <blue/unicode/unicode.hpp> // always use this, don't rely on the small headers
+#include <lion/unicode/unicode.hpp> // always use this, don't rely on the small headers
 
-namespace uni = blue::unicode; // convenience namespace alias
+namespace uni = lion::unicode; // convenience namespace alias
 
 int main()
 {
@@ -289,7 +291,7 @@ The three classes provide equivalent interfaces. Because of that there will be o
 
 ### The `utf32` class
 ```c++
-namespace blue::unicode
+namespace lion::unicode
 {
     class utf32
     {
@@ -366,7 +368,7 @@ namespace blue::unicode
 
 ### The `utf16` class
 ```c++
-namespace blue::unicode
+namespace lion::unicode
 {
     class utf16
     {
@@ -443,7 +445,7 @@ namespace blue::unicode
 
 ### The `utf8` class
 ```c++
-namespace blue::unicode
+namespace lion::unicode
 {
     class utf8
     {
@@ -532,11 +534,11 @@ namespace blue::unicode
 ### An example usage of `utf32`, `utf16` and `utf8`
 
 ```c++
-#include <blue/unicode/unicode.hpp>
+#include <lion/unicode/unicode.hpp>
 
 #include <iterator> // for std::back_inserter
 
-namespace uni = blue::unicode;
+namespace uni = lion::unicode;
 
 int main()
 {
@@ -580,9 +582,9 @@ int main()
 The `utf32`, `utf16` and `utf8` classes also provide a member type `iterator`. It acts as a `BidirectionalIterator` over a Unicode sequence. The sequence must be valid, as the iterators don't do any error checking. 
 
 ```c++
-#include <blue/unicode/unicode.hpp>
+#include <lion/unicode/unicode.hpp>
 
-namespace uni = blue::unicode;
+namespace uni = lion::unicode;
 
 int main()
 {
@@ -601,7 +603,7 @@ int main()
 The library also includes a few helper functions that combine some of the aforementioned.
 
 ```c++
-namespace blue::unicode
+namespace lion::unicode
 {
     using default_utf = utf16;
     constexpr byte_order default_byte_order = byte_order::big;
@@ -631,9 +633,9 @@ namespace blue::unicode
 ### Example usage of the utilities
 
 ```c++
-#include <blue/unicode/unicode.hpp>
+#include <lion/unicode/unicode.hpp>
 
-namespace uni = blue::unicode;
+namespace uni = lion::unicode;
 
 int main()
 {
