@@ -16,7 +16,7 @@ namespace lion::unicode
 	constexpr byte_order default_byte_order = byte_order::big;
 
 	template<typename UTF = default_utf, conversion conv = conversion::strict>
-	typename UTF::string_type convert(utf8::string_type str)
+	typename UTF::string_type convert(const utf8::string_type& str)
 	{
 		static_assert(std::is_same_v<UTF, utf8> || std::is_same_v<UTF, utf16> || std::is_same_v<UTF, utf32>,
 			"convert<UTF, conv> requires UTF to be one of utf8, utf16, utf32");
@@ -36,7 +36,7 @@ namespace lion::unicode
 	}
 
 	template<typename UTF = default_utf, conversion conv = conversion::strict>
-	typename UTF::string_type convert(utf16::string_type str)
+	typename UTF::string_type convert(const utf16::string_type& str)
 	{
 		static_assert(std::is_same_v<UTF, utf8> || std::is_same_v<UTF, utf16> || std::is_same_v<UTF, utf32>,
 			"convert<UTF, conv> requires UTF to be one of utf8, utf16, utf32");
@@ -56,7 +56,7 @@ namespace lion::unicode
 	}
 
 	template<typename UTF = default_utf, conversion conv = conversion::strict>
-	typename UTF::string_type convert(utf32::string_type str)
+	typename UTF::string_type convert(const utf32::string_type& str)
 	{
 		static_assert(std::is_same_v<UTF, utf8> || std::is_same_v<UTF, utf16> || std::is_same_v<UTF, utf32>,
 			"convert<UTF, conv> requires UTF to be one of utf8, utf16, utf32");
